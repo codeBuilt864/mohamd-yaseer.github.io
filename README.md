@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # DevOps Portfolio 🚀
 
 A modern, responsive portfolio website showcasing DevOps skills and projects, built with React and deployed using GitHub Pages with automated CI/CD.
@@ -209,3 +210,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 ⭐ **Star this repository if you found it helpful!**
+=======
+# mohamd-yaseer.github.io
+personal portfolio website for devops 
+>>>>>>> e1e732247b91e7c5a0e94b6a6907e7f8cac34e46

@@ -8,7 +8,7 @@ const Footer = () => {
       <Container>
         <Row>
           <Col md={6} className="text-center text-md-start">
-            <p>&copy; {new Date().getFullYear()} DevOps Portfolio</p>
+            <p>&copy; {new Date().getFullYear()} Mohamed Yaseer. All rights reserved.</p>
           </Col>
           <Col md={6} className="text-center text-md-end">
             <nav aria-label="Social media links">
