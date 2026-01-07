@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  frontend:
+    image: ssayan/devops-portfolio:latest
+    container_name: devops-portfolio
+    ports:
+      - "8080:80"
+    restart: unless-stopped
