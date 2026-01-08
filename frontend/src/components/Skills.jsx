@@ -49,12 +49,12 @@ const SkillCategory = styled(Card)`
 
 const CategoryHeader = styled.div`
   background: transparent;
-  color: ${props => props.isDark ? '#ffffff' : '#333333'};
+  color: ${props => props.$isDark ? '#ffffff' : '#333333'};
   padding: 1.5rem 1rem 1rem;
   text-align: center;
   font-weight: 700;
   font-size: 1.1rem;
-  text-shadow: ${props => props.isDark ? '0 2px 4px rgba(0,0,0,0.3)' : '0 1px 2px rgba(255,255,255,0.5)'};
+  text-shadow: ${props => props.$isDark ? '0 2px 4px rgba(0,0,0,0.3)' : '0 1px 2px rgba(255,255,255,0.5)'};
   
   @media (max-width: 768px) {
     padding: 1.2rem 0.8rem 0.8rem;
@@ -93,7 +93,7 @@ const SkillItem = styled.div`
 
 const SkillIcon = styled.div`
   font-size: 1.4rem;
-  color: ${props => props.isDark ? '#ffffff' : '#ac81c0'};
+  color: ${props => props.$isDark ? '#ffffff' : '#ac81c0'};
   margin-right: 1rem;
   width: 30px;
   display: flex;
@@ -135,60 +135,73 @@ const Skills = () => {
     return () => window.removeEventListener('resize', updateCardsPerSlide);
   }, []);
 
-  const skillCategories = [
-    {
-      title: "CI/CD",
-      skills: [
-        { name: "Jenkins", icon: <FaJenkins /> },
-        { name: "GitHub Actions", icon: <FaGithub /> },
-        { name: "ArgoCD", icon: <SiKubernetes /> }
-      ]
-    },
-    {
-      title: "Containers & Orchestration",
-      skills: [
-        { name: "Docker", icon: <FaDocker /> },
-        { name: "Kubernetes", icon: <SiKubernetes /> },
-        { name: "Helm", icon: <SiKubernetes /> }
-      ]
-    },
-    {
-      title: "Infrastructure as Code",
-      skills: [
-        { name: "Terraform", icon: <SiTerraform /> },
-        { name: "CloudFormation", icon: <FaAws /> },
-        { name: "Ansible", icon: <SiAnsible /> }
-      ]
-    },
-    {
-      title: "Cloud Platforms",
-      skills: [
-        { name: "AWS", icon: <FaAws /> }
-      ]
-    },
-    {
-      title: "Monitoring & Logging",
-      skills: [
-        { name: "Prometheus", icon: <SiPrometheus /> },
-        { name: "Grafana", icon: <SiGrafana /> }
-      ]
-    },
-    {
-      title: "Development & Version Control",
-      skills: [
-        { name: "Git & GitHub", icon: <FaGithub /> },
-        { name: "Python", icon: <FaCode /> },
-        { name: "Bash/Shell", icon: <FaTerminal /> }
-      ]
-    },
-    {
-      title: "Security",
-      skills: [
-        { name: "Secret Management", icon: <FaLock /> },
-        { name: "IAM", icon: <FaLock /> }
-      ]
-    }
-  ];
+const skillCategories = [
+  {
+    title: "CI/CD & Automation",
+    skills: [
+      { name: "Jenkins", icon: <FaJenkins /> },
+      { name: "GitHub Actions", icon: <FaGithub /> },
+      { name: "GitLab CI", icon: <FaCode /> },
+      { name: "ArgoCD", icon: <SiKubernetes /> },
+      { name: "Python Scripting", icon: <FaCode /> }
+    ]
+  },
+  {
+    title: "Containers & Orchestration",
+    skills: [
+      { name: "Docker", icon: <FaDocker /> },
+      { name: "Docker Compose", icon: <FaDocker /> },
+      { name: "Kubernetes", icon: <SiKubernetes /> },
+      { name: "Helm Charts", icon: <SiKubernetes /> },
+      { name: "Podman", icon: <FaDocker /> }
+    ]
+  },
+  {
+    title: "Infrastructure as Code",
+    skills: [
+      { name: "Terraform", icon: <SiTerraform /> },
+      { name: "AWS CloudFormation", icon: <FaAws /> },
+      { name: "Ansible", icon: <SiAnsible /> },,
+      { name: "Cloud Deployment Manager", icon: <FaAws /> }
+    ]
+  },
+  {
+    title: "Cloud Platforms",
+    skills: [
+      { name: "AWS", icon: <FaAws /> },
+      { name: "Google Cloud", icon: <FaAws /> }
+    ]
+  },
+  {
+    title: "Monitoring & Observability",
+    skills: [
+      { name: "Prometheus", icon: <SiPrometheus /> },
+      { name: "Grafana", icon: <SiGrafana /> },
+      { name: "ELK Stack", icon: <FaCode /> },
+      { name: "CloudWatch", icon: <FaAws /> },
+    ]
+  },
+  {
+    title: "Development & Version Control",
+    skills: [
+      { name: "Git & GitHub", icon: <FaGithub /> },
+      { name: "Python", icon: <FaCode /> },
+      { name: "Bash/Shell Scripting", icon: <FaTerminal /> },
+      { name: "YAML/JSON", icon: <FaCode /> },
+      { name: "Linux/Unix", icon: <FaTerminal /> }
+    ]
+  },
+  {
+    title: "Security & Networking",
+    skills: [
+      { name: "Secret Management", icon: <FaLock /> },
+      { name: "AWS IAM", icon: <FaLock /> },
+      { name: "Network Security", icon: <FaLock /> },
+      { name: "SSL/TLS", icon: <FaLock /> },
+      { name: "Firewall Configuration", icon: <FaLock /> }
+    ]
+  }
+];
 
   // Group categories based on screen size
   const groupedCategories = [];
@@ -225,13 +238,13 @@ const Skills = () => {
                 return (
                   <div key={index} className={`${colClass} mb-4`}>
                     <SkillCategory theme={isDarkMode ? 'dark' : 'light'}>
-                      <CategoryHeader isDark={isDarkMode}>
+                      <CategoryHeader $isDark={isDarkMode}>
                         <h6 className="mb-0">{category.title}</h6>
                       </CategoryHeader>
                       <Card.Body className="px-3 pb-3 pt-0">
                         {category.skills.map((skill, skillIndex) => (
-                          <SkillItem key={skillIndex} isDark={isDarkMode}>
-                            <SkillIcon isDark={isDarkMode}>
+                          <SkillItem key={skillIndex} $$isDark={isDarkMode}>
+                            <SkillIcon $$isDark={isDarkMode}>
                               {skill.icon}
                             </SkillIcon>
                             <div className="flex-grow-1" style={{display: 'flex', alignItems: 'center'}}>
@@ -261,7 +274,7 @@ const Skills = () => {
         ))}
       </Carousel>
       
-      <style jsx>{`
+      <style>{`
         .skills-carousel {
           padding: 0 60px;
         }
@@ -376,3 +389,5 @@ const Skills = () => {
 };
 
 export default Skills;
+
+

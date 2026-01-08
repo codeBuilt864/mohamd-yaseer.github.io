@@ -6,7 +6,7 @@ import { ThemeContext } from '../context/ThemeContext';
 
 const ProjectCard = styled(Card)`
   border: 1px solid rgba(172, 129, 192, 0.3);
-  background: ${props => props.isDark ? 
+  background: ${props => props.$isDark ? 
     'rgba(255, 255, 255, 0.08)' : 
     'rgba(255, 255, 255, 0.9)'
   };
@@ -52,7 +52,7 @@ const ProjectCard = styled(Card)`
 `;
 
 const ProjectTitle = styled.h4`
-  color: ${props => props.isDark ? '#ffffff' : '#333333'} !important;
+  color: ${props => props.$isDark ? '#ffffff' : '#333333'} !important;
   font-weight: 700 !important;
   margin-bottom: 1rem;
   font-size: 1.1rem !important;
@@ -76,7 +76,7 @@ const ProjectTitle = styled.h4`
 `;
 
 const ProjectDescription = styled.p`
-  color: ${props => props.isDark ? '#e0e0e0' : '#666666'};
+  color: ${props => props.$isDark ? '#e0e0e0' : '#666666'};
   font-size: 0.9rem;
   line-height: 1.5;
   margin-bottom: 1rem;
@@ -98,7 +98,7 @@ const ProjectDescription = styled.p`
 `;
 
 const OutcomeText = styled.p`
-  color: ${props => props.isDark ? '#b0b0b0' : '#555555'};
+  color: ${props => props.$isDark ? '#b0b0b0' : '#555555'};
   font-size: 0.8rem;
   line-height: 1.4;
   text-align: left;
@@ -224,9 +224,9 @@ const Projects = () => {
                                  'col-lg-4 col-md-6 col-12';
                   return (
                     <div key={index} className={`${colClass} mb-4`}>
-                      <ProjectCard isDark={isDarkMode}>
+                      <ProjectCard $isDark={isDarkMode}>
                         <Card.Body className="p-3 p-md-4 d-flex flex-column" style={{position: 'relative', zIndex: 2}}>
-                          <ProjectTitle isDark={isDarkMode} style={{color: isDarkMode ? '#ffffff' : '#333333'}}>
+                          <ProjectTitle $$isDark={isDarkMode} style={{color: isDarkMode ? '#ffffff' : '#333333'}}>
                             <FaRocket className="me-2" style={{color: '#ac81c0'}} />
                             {project.title}
                           </ProjectTitle>
@@ -237,7 +237,7 @@ const Projects = () => {
                             ))}
                           </div>
                           
-                          <ProjectDescription isDark={isDarkMode}>
+                          <ProjectDescription $$isDark={isDarkMode}>
                             {project.description}
                           </ProjectDescription>
                           
@@ -246,7 +246,7 @@ const Projects = () => {
                               <FaCode className="me-2" />
                               Key Outcomes:
                             </h6>
-                            <OutcomeText isDark={isDarkMode}>
+                            <OutcomeText $$isDark={isDarkMode}>
                               {project.outcomes}
                             </OutcomeText>
                           </div>
@@ -406,3 +406,4 @@ const Projects = () => {
 };
 
 export default Projects;
+
