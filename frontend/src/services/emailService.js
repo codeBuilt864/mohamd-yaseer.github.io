@@ -1,9 +1,9 @@
 import emailjs from '@emailjs/browser';
 
 // EmailJS configuration
-const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
-const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+const SERVICE_ID = 'service_w04rpxb';
+const TEMPLATE_ID = 'template_pb4wgbk';
+const PUBLIC_KEY = 'EjHFp4_9JY3oak96z';
 
 export const sendEmail = async (formData) => {
   try {
