@@ -1,0 +1,296 @@
+/* Modern vibrant color palette */
+:root {
+  --vibrant-purple: #8A2BE2;
+  --vibrant-pink: #FF1493;
+  --vibrant-blue: #00BFFF;
+  --vibrant-teal: #00CED1;
+  --vibrant-green: #00FA9A;
+  --vibrant-yellow: #FFD700;
+  --vibrant-orange: #FF8C00;
+}
+
+/* Enhanced gradient text effect */
+.gradient-text {
+  background: linear-gradient(90deg, var(--vibrant-blue), var(--vibrant-purple), var(--vibrant-pink));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradient-shift 8s ease infinite;
+  background-size: 300% 300%;
+  position: relative;
+}
+
+.gradient-text::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, var(--vibrant-blue), var(--vibrant-purple), var(--vibrant-pink));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: blur(8px);
+  opacity: 0.7;
+}
+
+/* Advanced button effects */
+.cta-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--vibrant-purple), var(--vibrant-blue));
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-5px) scale(1.03);
+  color: white !important;
+}
+
+.cta-button:hover::before {
+  opacity: 1;
+}
+
+/* Enhanced glow effect */
+.glow-button {
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.glow-button:hover {
+  box-shadow: 0 0 30px var(--vibrant-purple), 0 0 60px rgba(180, 123, 234, 0.4);
+  background: linear-gradient(45deg, var(--vibrant-purple), var(--vibrant-blue)) !important;
+  border-color: var(--vibrant-blue) !important;
+}
+
+/* Advanced card hover effects */
+.project-card {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 16px !important;
+  overflow: hidden;
+  position: relative;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--vibrant-blue), var(--vibrant-purple), var(--vibrant-pink));
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2) !important;
+}
+
+.project-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Enhanced nav link hover effects */
+.navbar-nav .nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--vibrant-blue), var(--vibrant-purple));
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--vibrant-purple) !important;
+  transform: translateY(-2px);
+}
+
+.navbar-nav .nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Dark mode enhancements */
+[data-theme='dark'] .gradient-text {
+  background: linear-gradient(90deg, var(--vibrant-teal), var(--vibrant-blue), var(--vibrant-purple));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+}
+
+[data-theme='dark'] .glow-button:hover {
+  box-shadow: 0 0 30px var(--vibrant-blue), 0 0 60px rgba(0, 191, 255, 0.4);
+  background: linear-gradient(45deg, var(--vibrant-blue), var(--vibrant-teal)) !important;
+  border-color: var(--vibrant-teal) !important;
+}
+
+[data-theme='dark'] .navbar-nav .nav-link:hover {
+  color: var(--vibrant-blue) !important;
+}
+
+[data-theme='dark'] .navbar-nav .nav-link::after {
+  background: linear-gradient(90deg, var(--vibrant-teal), var(--vibrant-blue));
+}
+
+[data-theme='dark'] .project-card::before {
+  background: linear-gradient(90deg, var(--vibrant-teal), var(--vibrant-blue), var(--vibrant-purple));
+}
+/* Custom cursor effects */
+.custom-cursor-outer,
+.custom-cursor-inner {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+}
+
+.custom-cursor-outer {
+  width: 30px;
+  height: 30px;
+  border: 2px solid white;
+  border-radius: 50%;
+  transition: width 0.2s, height 0.2s;
+  mix-blend-mode: difference;
+}
+
+.custom-cursor-inner {
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border-radius: 50%;
+  transition: width 0.2s, height 0.2s;
+  mix-blend-mode: difference;
+}
+
+/* Cursor hover effect */
+.clickable {
+  cursor: none;
+}
+
+.custom-cursor-hover .custom-cursor-outer {
+  width: 40px;
+  height: 40px;
+}
+
+.custom-cursor-hover .custom-cursor-inner {
+  width: 8px;
+  height: 8px;
+}
+
+/* Spotlight effect for skill cards */
+.spotlight-card {
+  position: relative;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(172, 129, 192, 0.8) 0%,
+    rgba(172, 129, 192, 0.2) 40%,
+    rgba(172, 129, 192, 0) 60%
+  );
+  opacity: 0;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* Light theme specific adjustments */
+:root:not([data-theme='dark']) .spotlight-card::before {
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(194, 133, 206, 0.7) 0%,
+    rgba(249, 157, 206, 0.3) 30%,
+    rgba(255, 215, 0, 0) 60%
+  );
+  mix-blend-mode: multiply;
+}
+
+.spotlight-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Ensure the content is above the spotlight effect */
+.spotlight-card .card-body {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+}
+
+/* Profile image glow effect */
+.profile-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(172, 129, 192, 0.3) 0%,
+    rgba(108, 92, 231, 0.2) 30%,
+    rgba(162, 155, 254, 0.1) 60%,
+    transparent 80%
+  );
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 575px) {
+  .profile-glow {
+    width: 220px;
+    height: 220px;
+  }
+}
