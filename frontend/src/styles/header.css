@@ -1,0 +1,44 @@
+.navbar-dark { --header-ink: #f2f0e9; --header-muted: #9b9d9a; --header-acid: #d8ff54; --header-line: rgba(242,240,233,.14); min-height: 62px; background: #101312 !important; border-bottom: 1px solid var(--header-line); transition: background .3s ease, box-shadow .3s ease, border-color .3s ease; }
+.navbar-dark.navbar-glass { background: rgba(16,19,18,.9) !important; border-bottom-color: rgba(216,255,84,.24); box-shadow: 0 10px 35px rgba(0,0,0,.2); }
+.header-inner { min-height: 62px; }
+.header-brand { display: inline-flex !important; align-items: center; gap: 13px; color: var(--header-ink) !important; padding: 0 !important; }.header-brand:hover { color: var(--header-ink) !important; }.header-brand-mark { color: var(--header-acid); font: 600 19px/1 Georgia, serif; letter-spacing: .05em; }.header-brand-meta { display: inline-flex; align-items: center; gap: 7px; color: var(--header-muted); font: 8px 'Courier New', monospace; letter-spacing: .11em; }.header-brand-meta i { width: 5px; height: 5px; border-radius: 50%; background: var(--header-acid); box-shadow: 0 0 8px var(--header-acid); }
+.header-nav { align-items: center; gap: 2px; }.header-nav .nav-link { display: flex; align-items: center; gap: 7px; position: relative; padding: 22px 10px !important; color: var(--header-muted) !important; font: 10px 'Courier New', monospace; letter-spacing: .06em; text-transform: uppercase; transition: color .25s ease, transform .25s ease !important; }.header-nav .nav-link span { color: rgba(155,157,154,.45); font-size: 8px; }.header-nav .nav-link::after { content: ''; position: absolute; right: 10px; bottom: 13px; left: 27px; width: auto; height: 1px; background: var(--header-acid); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }.header-nav .nav-link:hover, .header-nav .nav-link.active { color: var(--header-acid) !important; transform: translateY(-1px); }.header-nav .nav-link:hover::after, .header-nav .nav-link.active::after { transform: scaleX(1); }.header-nav .nav-link.active span { color: var(--header-acid); }
+.header-menu-toggle { border: 1px solid rgba(216,255,84,.35) !important; border-radius: 0 !important; padding: 7px 9px !important; }.header-menu-toggle:focus { box-shadow: 0 0 0 2px rgba(216,255,84,.2) !important; }.header-menu-toggle .navbar-toggler-icon { background-image: linear-gradient(var(--header-acid), var(--header-acid)), linear-gradient(var(--header-acid), var(--header-acid)), linear-gradient(var(--header-acid), var(--header-acid)) !important; background-size: 22px 1px; background-position: center 25%, center 50%, center 75%; background-repeat: no-repeat; }
+@media (max-width: 991.98px) { .navbar-dark .navbar-collapse { margin: 12px -12px -7px; padding: 9px 12px 13px; border-top: 1px solid var(--header-line); background: rgba(16,19,18,.96); }.header-nav { align-items: stretch; gap: 0; }.header-nav .nav-link { padding: 12px 10px !important; }.header-nav .nav-link::after { right: 10px; bottom: 6px; left: 38px; }.header-brand-meta { display: none; } }
+@media (max-width: 575px) { .navbar-dark { min-height: 56px; }.header-inner { min-height: 56px; }.header-brand-mark { font-size: 17px; } }
+
+main > section.section-arrival {
+	position: relative;
+	animation: section-arrival .85s cubic-bezier(.2,.8,.2,1) both;
+}
+
+main > section.section-arrival::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 2px;
+	z-index: 5;
+	background: var(--header-acid);
+	transform-origin: left;
+	animation: section-arrival-line .85s cubic-bezier(.2,.8,.2,1) both;
+	pointer-events: none;
+}
+
+@keyframes section-arrival {
+	0% { opacity: .72; transform: translateY(18px); }
+	55% { opacity: 1; transform: translateY(-3px); }
+	100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes section-arrival-line {
+	0% { opacity: 0; transform: scaleX(0); }
+	25% { opacity: 1; transform: scaleX(.35); }
+	100% { opacity: 0; transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	main > section.section-arrival { animation: none; }
+	main > section.section-arrival::before { animation: none; }
+}

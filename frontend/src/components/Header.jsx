@@ -3,6 +3,7 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import ThemeToggle from './ThemeToggle';
 import { ThemeContext } from '../context/ThemeContext';
 import styled from 'styled-components';
+import '../styles/header.css';
 
 const ThemeToggleWrapper = styled.div`
   margin-left: 15px;
@@ -34,10 +35,37 @@ const Header = () => {
   const { isDarkMode } = useContext(ThemeContext);
   const [expanded, setExpanded] = useState(false);
   const navbarRef = useRef(null);
+  const scrollAnimationRef = useRef(null);
   useEffect(() => {
-    // Handle navigation clicks with proper scrolling
+    const smoothScrollTo = (targetPosition) => {
+      if (scrollAnimationRef.current) {
+        window.cancelAnimationFrame(scrollAnimationRef.current);
+      }
+
+      const startPosition = window.scrollY;
+      const distance = targetPosition - startPosition;
+      const duration = Math.min(1100, Math.max(650, Math.abs(distance) * 0.55));
+      const startTime = performance.now();
+      const easeInOut = (progress) => progress < 0.5
+        ? 2 * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+      const animate = (currentTime) => {
+        const progress = Math.min(1, (currentTime - startTime) / duration);
+        window.scrollTo(0, startPosition + distance * easeInOut(progress));
+        if (progress < 1) {
+          scrollAnimationRef.current = window.requestAnimationFrame(animate);
+        } else {
+          scrollAnimationRef.current = null;
+        }
+      };
+
+      scrollAnimationRef.current = window.requestAnimationFrame(animate);
+    };
+
     const handleNavClick = (e) => {
-      const href = e.target.getAttribute('href');
+      const link = e.target.closest('a[href^="#"]');
+      const href = link?.getAttribute('href');
       if (href && href.startsWith('#')) {
         e.preventDefault();
         
@@ -47,19 +75,21 @@ const Header = () => {
         });
         
         // Add active to clicked link
-        e.target.classList.add('active');
+        link.classList.add('active');
         
         const targetId = href.substring(1);
         const targetElement = document.getElementById(targetId);
         
         if (targetElement) {
           const navbarHeight = document.querySelector('.navbar').offsetHeight;
-          const targetPosition = targetElement.offsetTop - navbarHeight - 20;
+          const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight - 20;
+
+          targetElement.classList.remove('section-arrival');
+          void targetElement.offsetWidth;
+          targetElement.classList.add('section-arrival');
+          window.setTimeout(() => targetElement.classList.remove('section-arrival'), 950);
           
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
+          smoothScrollTo(Math.max(0, targetPosition));
         }
         
         // Close navbar on mobile after click
@@ -76,6 +106,9 @@ const Header = () => {
       navLinks.forEach(link => {
         link.removeEventListener('click', handleNavClick);
       });
+      if (scrollAnimationRef.current) {
+        window.cancelAnimationFrame(scrollAnimationRef.current);
+      }
     };
   }, []);
   
@@ -83,16 +116,15 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll('section[id]');
-      const scrollPosition = window.pageYOffset + 100;
-      let activeSection = null;
-      
-      // Find the current active section
+      const activationLine = 120;
+      let activeSection = sections[0]?.getAttribute('id');
+      let closestDistance = Number.POSITIVE_INFINITY;
+
       sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        const distance = Math.abs(section.getBoundingClientRect().top - activationLine);
+        if (section.getBoundingClientRect().top <= activationLine && distance < closestDistance) {
           activeSection = section.getAttribute('id');
+          closestDistance = distance;
         }
       });
       
@@ -156,23 +188,26 @@ const Header = () => {
       role="navigation"
       aria-label="Main navigation"
     >
-      <Container className="d-flex justify-content-between">
+      <Container className="header-inner d-flex justify-content-between">
         <NavbarBrandWrapper>
-          <Navbar.Brand href="#home" className="gradient-text">YSR</Navbar.Brand>
+          <Navbar.Brand href="#home" className="header-brand">
+            <span className="header-brand-mark">YSR</span>
+            <span className="header-brand-meta"><i /> DEVOPS / CLOUD</span>
+          </Navbar.Brand>
         </NavbarBrandWrapper>
         <div className="d-flex align-items-center">
           <ThemeToggleWrapper className="d-flex d-lg-none me-2">
             <ThemeToggle />
           </ThemeToggleWrapper>
-          <CustomToggle 
+          <CustomToggle
+            className="header-menu-toggle"
             aria-controls="basic-navbar-nav" 
             onClick={() => setExpanded(!expanded)}
             aria-label="Toggle navigation"
           />
         </div>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto" as="ul">
-            <Nav.Item as="li"><Nav.Link href="#home">Home</Nav.Link></Nav.Item>
+          <Nav className="header-nav ms-auto" as="ul">
             <Nav.Item as="li"><Nav.Link href="#about">About</Nav.Link></Nav.Item>
             <Nav.Item as="li"><Nav.Link href="#skills">Skills</Nav.Link></Nav.Item>
             <Nav.Item as="li"><Nav.Link href="#projects">Projects</Nav.Link></Nav.Item>

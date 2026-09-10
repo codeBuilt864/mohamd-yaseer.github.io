@@ -1,65 +1,66 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
-import { FaLightbulb } from 'react-icons/fa';
+import { FaMoon, FaSun } from 'react-icons/fa';
 import styled from 'styled-components';
 
-const ToggleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+const ToggleContainer = styled.button`
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 32px;
+  padding: 3px;
+  border: 1px solid rgba(216, 255, 84, 0.45);
+  border-radius: 999px;
+  background: ${props => props.isDarkMode ? '#101312' : '#ffffff'};
   cursor: pointer;
   position: relative;
-  padding: 0;
-  margin: 0;
-  height: 100%;
+  overflow: hidden;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: ${props => props.isDarkMode ? '0 0 18px rgba(216,255,84,.12)' : '0 0 18px rgba(16,19,18,.16)'};
+
+  &:hover { border-color: #d8ff54; box-shadow: 0 0 24px rgba(216,255,84,.3); }
+  &:focus-visible { outline: 2px solid #d8ff54; outline-offset: 3px; }
 `;
 
-const String = styled.div`
-  width: 2px;
-  height: 15px;
-  background-color: #888;
-  
-  @media (max-width: 992px) {
-    height: 10px;
-  }
+const ToggleThumb = styled.span`
+  position: absolute;
+  top: 3px;
+  left: ${props => props.isDarkMode ? '29px' : '3px'};
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: ${props => props.isDarkMode ? '#ffffff' : '#101312'};
+  color: ${props => props.isDarkMode ? '#101312' : '#ffffff'};
+  font-size: 11px;
+  transition: left 0.3s cubic-bezier(.2,.8,.2,1), background 0.3s ease, color 0.3s ease;
 `;
 
-const BulbWrapper = styled.div`
-  transform: rotate(180deg);
-  color: ${props => props.isDarkMode ? '#555' : '#f8d568'};
-  font-size: 1.5rem;
-  transition: all 0.3s ease;
-  position: relative;
-  
-  @media (max-width: 992px) {
-    font-size: 1.2rem;
-  }
-`;
-
-const Glow = styled.div`
+const ToggleIcon = styled.span`
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 25px;
-  height: 25px;
-  background: radial-gradient(circle, rgba(255,213,0,0.6) 0%, rgba(255,213,0,0) 70%);
-  border-radius: 50%;
-  opacity: ${props => props.isDarkMode ? 0 : 1};
-  transition: opacity 0.3s ease;
-  z-index: -1;
+  transform: translateY(-50%);
+  left: ${props => props.isDarkMode ? '10px' : '39px'};
+  color: ${props => props.isDarkMode ? 'rgba(216,255,84,.7)' : 'rgba(16,19,18,.5)'};
+  font-size: 10px;
+  transition: left 0.3s ease, color 0.3s ease;
 `;
 
 const ThemeToggle = () => {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   
   return (
-    <ToggleContainer onClick={toggleTheme}>
-      <String />
-      <BulbWrapper isDarkMode={isDarkMode}>
-        <Glow isDarkMode={isDarkMode} />
-        <FaLightbulb />
-      </BulbWrapper>
+    <ToggleContainer
+      type="button"
+      isDarkMode={isDarkMode}
+      onClick={toggleTheme}
+      aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
+      title={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
+    >
+      <ToggleIcon isDarkMode={isDarkMode}>{isDarkMode ? <FaSun /> : <FaMoon />}</ToggleIcon>
+      <ToggleThumb isDarkMode={isDarkMode}>{isDarkMode ? <FaMoon /> : <FaSun />}</ToggleThumb>
     </ToggleContainer>
   );
 };

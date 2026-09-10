@@ -383,9 +383,200 @@ a,
 [data-theme='dark'] .resume-download-btn:hover {
   color: #C9A0DC !important;
 }
+
+[data-theme='light'] .site-footer .footer-cta,
+[data-theme='light'] .site-footer .footer-links a,
+[data-theme='light'] .site-footer .footer-bottom {
+  color: #101312 !important;
+}
 /* Fix footer text visibility in light theme */
 footer.bg-dark p {
   color: #ffffff !important;
+}
+
+/* Portfolio-wide monochrome mode for the redesigned sections. */
+[data-theme='light'] body,
+[data-theme='light'] main,
+[data-theme='light'] .App,
+[data-theme='light'] .home-shell,
+[data-theme='light'] .about-section,
+[data-theme='light'] .skills-section,
+[data-theme='light'] .projects-section,
+[data-theme='light'] .certifications-section {
+  background: #ffffff !important;
+  color: #101312 !important;
+}
+
+[data-theme='light'] .resume-section {
+  background: #ffffff !important;
+  color: #101312 !important;
+  --resume-ink: #101312;
+  --resume-muted: #59615b;
+  --resume-line: rgba(16,19,18,.18);
+}
+
+[data-theme='light'] .site-footer {
+  --footer-ink: #101312;
+  --footer-muted: #59615b;
+  --footer-line: rgba(16,19,18,.18);
+  background: #ffffff !important;
+  color: #101312 !important;
+}
+
+[data-theme='light'] .site-footer .footer-prompt h2,
+[data-theme='light'] .site-footer .footer-cta,
+[data-theme='light'] .site-footer .footer-links a,
+[data-theme='light'] .site-footer .footer-bottom {
+  color: #101312 !important;
+}
+
+[data-theme='light'] .home-shell,
+[data-theme='light'] .about-section,
+[data-theme='light'] .skills-section,
+[data-theme='light'] .projects-section,
+[data-theme='light'] .certifications-section {
+  --ink: #101312;
+  --muted: #59615b;
+  --about-ink: #101312;
+  --about-muted: #59615b;
+  --skills-ink: #101312;
+  --skills-muted: #59615b;
+  --project-ink: #101312;
+  --project-muted: #59615b;
+  --cert-ink: #101312;
+  --cert-muted: #59615b;
+  --line: rgba(16,19,18,.18);
+  --about-line: rgba(16,19,18,.18);
+  --skills-line: rgba(16,19,18,.18);
+  --project-line: rgba(16,19,18,.18);
+  --cert-line: rgba(16,19,18,.18);
+}
+
+[data-theme='light'] .hero-stage,
+[data-theme='light'] .skills-console,
+[data-theme='light'] .projects-console,
+[data-theme='light'] .certifications-console,
+[data-theme='light'] .about-card,
+[data-theme='light'] .resume-viewer-shell {
+  background: #f7f8f4 !important;
+  border-color: rgba(16,19,18,.28) !important;
+  box-shadow: 18px 20px 0 rgba(16,19,18,.08), 0 35px 80px rgba(16,19,18,.12);
+}
+
+[data-theme='light'] .home-hero,
+[data-theme='light'] .capability-section,
+[data-theme='light'] .resume-viewer-shell {
+  background: #f7f8f5 !important;
+}
+
+[data-theme='light'] .hero-stage {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+[data-theme='light'] .profile-object {
+  box-shadow: 0 30px 70px rgba(16,19,18,.24), 0 10px 24px rgba(16,19,18,.12);
+}
+
+[data-theme='light'] .profile-object:hover {
+  box-shadow: 0 38px 90px rgba(16,19,18,.28), 0 12px 28px rgba(16,19,18,.14);
+}
+
+[data-theme='light'] .profile-object::before {
+  border-color: rgba(98,125,38,.55);
+}
+
+[data-theme='light'] .orbit {
+  border-color: rgba(98,125,38,.42);
+}
+
+[data-theme='light'] .orbit-tight {
+  border-color: rgba(16,19,18,.2);
+}
+
+[data-theme='light'] .about-card {
+  background: linear-gradient(135deg, #f7f8f4, #ffffff 62%) !important;
+}
+
+[data-theme='light'] .header-brand,
+[data-theme='light'] .header-brand:hover,
+[data-theme='light'] .header-nav .nav-link,
+[data-theme='light'] .header-nav .nav-link:hover,
+[data-theme='light'] .header-nav .nav-link.active {
+  color: #101312 !important;
+}
+
+[data-theme='light'] .navbar-dark,
+[data-theme='light'] .navbar-dark.navbar-glass {
+  background: rgba(255,255,255,.94) !important;
+  border-bottom-color: rgba(16,19,18,.16);
+  box-shadow: 0 10px 35px rgba(16,19,18,.08);
+}
+
+[data-theme='light'] .navbar-dark .navbar-collapse {
+  background: rgba(255,255,255,.97);
+}
+
+[data-theme='light'] .hero-grid,
+[data-theme='light'] .skills-console::before,
+[data-theme='light'] .projects-console::before,
+[data-theme='light'] .certifications-console::before {
+  opacity: .12;
+}
+
+[data-theme='light'] .hero-copy h1,
+[data-theme='light'] .capability-intro h2,
+[data-theme='light'] .hero-description,
+[data-theme='light'] .hero-metrics strong,
+[data-theme='light'] .hero-metrics span,
+[data-theme='light'] .hero-button,
+[data-theme='light'] .stage-label,
+[data-theme='light'] .stage-caption span,
+[data-theme='light'] .about-heading h2,
+[data-theme='light'] .about-intro,
+[data-theme='light'] .about-link,
+[data-theme='light'] .about-card-top,
+[data-theme='light'] .about-card-bottom,
+[data-theme='light'] .about-card h3,
+[data-theme='light'] .about-card-copy,
+[data-theme='light'] .about-detail-row h3,
+[data-theme='light'] .about-detail-row p {
+  color: #101312 !important;
+}
+
+[data-theme='light'] .hero-metrics,
+[data-theme='light'] .about-details,
+[data-theme='light'] .about-detail-row {
+  border-color: rgba(16,19,18,.22) !important;
+}
+
+[data-theme='light'] .about-card::after {
+  color: rgba(16,19,18,.12);
+}
+
+[data-theme='light'] .about-slide-button {
+  color: #101312;
+  border-color: rgba(16,19,18,.38);
+}
+
+[data-theme='light'] .about-card-line {
+  background: rgba(16,19,18,.24);
+}
+
+[data-theme='light'] .about-card-command,
+[data-theme='light'] .about-detail-index,
+[data-theme='light'] .about-card-top span:last-child,
+[data-theme='light'] .stage-caption small {
+  color: #101312 !important;
+}
+
+[data-theme='dark'] body,
+[data-theme='dark'] main,
+[data-theme='dark'] .App,
+[data-theme='dark'] .navbar-dark,
+[data-theme='dark'] .navbar-dark.navbar-glass {
+  background-color: #101312 !important;
 }
 
 footer.bg-dark a {
@@ -427,4 +618,10 @@ footer.bg-dark a:hover {
   background-color: #ffffff !important;
   color: #C9A0DC !important;
   border-color: #C9A0DC !important;
+}
+
+[data-theme='light'] .site-footer .footer-cta,
+[data-theme='light'] .site-footer .footer-links a,
+[data-theme='light'] .site-footer .footer-bottom {
+  color: #101312 !important;
 }
