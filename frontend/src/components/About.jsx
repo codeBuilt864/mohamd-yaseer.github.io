@@ -1,120 +1,217 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { FaArrowUpRightFromSquare, FaCodeBranch, FaTerminal } from 'react-icons/fa6';
-import { SiKubernetes, SiTerraform } from 'react-icons/si';
+import React from 'react';
+import { FaTerminal, FaCodeBranch, FaCheckCircle, FaAward, FaExternalLinkAlt } from 'react-icons/fa';
+import { SiAmazon, SiKubernetes, SiTerraform, SiDocker, SiLinux } from 'react-icons/si';
 import '../styles/about.css';
 
 const About = () => {
-  const aboutSectionRef = useRef(null);
-  const touchStartY = useRef(null);
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [slideDirection, setSlideDirection] = useState(1);
-  const slides = [
-    { command: '$ whoami', title: <>Builder of<br /><strong>better feedback loops.</strong></>, copy: 'I started with Linux fundamentals and found my place where development meets operations.', icon: <FaTerminal /> },
-    { command: '$ origin --show', title: <>Curiosity became<br /><strong>a practical craft.</strong></>, copy: 'Personal projects and focused learning turned questions into reliable, repeatable systems.', icon: <FaCodeBranch /> },
-    { command: '$ values --list', title: <>Make complexity<br /><strong>easier to trust.</strong></>, copy: 'I care about useful feedback, clear ownership, and automation that removes friction.', icon: <FaTerminal /> },
-    { command: '$ stack --focus', title: <>Infrastructure<br /><strong>in motion.</strong></>, copy: 'Cloud platforms, containers, and infrastructure as code are where I do my deepest learning.', icon: <SiTerraform /> },
-    { command: '$ next --run', title: <>Keep learning.<br /><strong>Keep shipping.</strong></>, copy: 'The next step is deeper Kubernetes, Terraform, and observability work shared with the community.', icon: <SiKubernetes /> }
-  ];
-
-  const changeSlide = (direction) => {
-    setSlideDirection(direction);
-    setActiveSlide((current) => (current + direction + slides.length) % slides.length);
-  };
-
-  useEffect(() => {
-    const section = aboutSectionRef.current;
-    const card = section?.querySelector('.about-card');
-    if (!section || !card) return undefined;
-
-    let frameId;
-    const updateParallax = () => {
-      frameId = undefined;
-      const bounds = section.getBoundingClientRect();
-      const progress = (window.innerHeight - bounds.top) / (window.innerHeight + bounds.height);
-      const offset = Math.max(-28, Math.min(28, (progress - 0.5) * 56));
-      card.style.setProperty('--about-scroll-y', `${offset}px`);
-    };
-    const handleScroll = () => {
-      if (!frameId) frameId = window.requestAnimationFrame(updateParallax);
-    };
-
-    updateParallax();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-      if (frameId) window.cancelAnimationFrame(frameId);
-    };
-  }, []);
-
-  const moveCard = (event) => {
-    const card = event.currentTarget;
-    const bounds = card.getBoundingClientRect();
-    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-    card.style.setProperty('--about-rotate-x', `${y * -7}deg`);
-    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-    card.style.setProperty('--about-rotate-y', `${x * 9}deg`);
-    card.style.setProperty('--about-spot-x', `${event.clientX - bounds.left}px`);
-    card.style.setProperty('--about-spot-y', `${event.clientY - bounds.top}px`);
-
-  };
-
-  const resetCard = (event) => {
-    event.currentTarget.style.setProperty('--about-rotate-x', '0deg');
-    event.currentTarget.style.setProperty('--about-rotate-y', '0deg');
-    event.currentTarget.style.setProperty('--about-spot-x', '50%');
-    event.currentTarget.style.setProperty('--about-spot-y', '50%');
-    touchStartY.current = null;
-  };
-
-  const handleWheel = (event) => {
-    if (Math.abs(event.deltaY) < 10) return;
-    event.preventDefault();
-    changeSlide(event.deltaY > 0 ? 1 : -1);
-  };
-
-  const handleTouchStart = (event) => {
-    touchStartY.current = event.touches[0].clientY;
-  };
-
-  const handleTouchEnd = (event) => {
-    if (touchStartY.current === null) return;
-    const distance = touchStartY.current - event.changedTouches[0].clientY;
-    if (Math.abs(distance) > 35) changeSlide(distance > 0 ? 1 : -1);
-    touchStartY.current = null;
-  };
-
   return (
-    <section ref={aboutSectionRef} className="about-section" aria-labelledby="about-title">
-      <div className="about-inner">
-        <div className="about-heading">
-          <p className="about-kicker"><span /> The person behind the pipeline</p>
-          <h2 id="about-title">Curious by<br /><em>default.</em></h2>
-          <p className="about-intro">I am Mohamed Yaseer, a junior DevOps engineer learning to turn complicated infrastructure into something teams can trust.</p>
-          <a className="about-link" href="https://linkedin.com/in/mhdyaseer" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <FaArrowUpRightFromSquare /></a>
-        </div>
-
-        <div className="about-card-wrap">
-          <div className="about-card" data-slide={String(activeSlide + 1).padStart(2, '0')} onMouseMove={moveCard} onMouseLeave={resetCard} onWheel={handleWheel} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-            <div className="about-card-top"><span>YSR / PROFILE</span><span>STATUS: LEARNING</span></div>
-            <div className={`about-card-main ${slideDirection > 0 ? 'slide-forward' : 'slide-back'}`} key={activeSlide}>
-              <div className="about-card-icon">{slides[activeSlide].icon}</div>
-              <p className="about-card-command">{slides[activeSlide].command}</p>
-              <h3>{slides[activeSlide].title}</h3>
-              <p className="about-card-copy">{slides[activeSlide].copy}</p>
-            </div>
-            <div className="about-card-bottom"><button type="button" className="about-slide-button" onClick={() => changeSlide(-1)} aria-label="Previous slide">&#8592;</button><span>{String(activeSlide + 1).padStart(2, '0')} / 05</span><span className="about-card-line" /><span className="about-card-hint">SCROLL TO EXPLORE</span><button type="button" className="about-slide-button" onClick={() => changeSlide(1)} aria-label="Next slide">&#8594;</button></div>
+    <section className="about-section" id="about" aria-labelledby="about-heading">
+      <div className="section-container">
+        {/* Section Header */}
+        <div className="section-header-centered reveal">
+          <div className="section-badge">
+            <span className="badge-dot" />
+            <span>CORE ARCHITECTURAL MANIFESTO</span>
           </div>
-          <div className="about-orbit-mark about-orbit-mark-one"><SiTerraform /></div>
-          <div className="about-orbit-mark about-orbit-mark-two"><SiKubernetes /></div>
+          <h2 id="about-heading" className="section-title-large">
+            Driven by curiosity, <span className="gradient-text-cyan">engineered for resilience.</span>
+          </h2>
+          <p className="section-subtitle">
+            I am Mohamed Yaseer, an AWS Certified Solutions Architect and DevOps engineer
+            dedicated to turning complex distributed systems into predictable, automated, and observable cloud operations.
+          </p>
         </div>
 
-        <div className="about-details">
-          <article className="about-detail-row"><span className="about-detail-index">01</span><div><h3>My journey</h3><p>Through personal projects, online courses, and challenges like #100DaysOfDevOps and KodeKloud, I have built practical experience in deployment automation and infrastructure.</p></div><FaCodeBranch /></article>
-          <article className="about-detail-row"><span className="about-detail-index">02</span><div><h3>My philosophy</h3><p>DevOps is culture before tools. I care about reducing silos, creating useful feedback, and making automation remove friction rather than hide complexity.</p></div><FaTerminal /></article>
-          <article className="about-detail-row"><span className="about-detail-index">03</span><div><h3>What is next</h3><p>Right now I am deepening my Kubernetes, Terraform, and observability skills while sharing what I learn with the community.</p></div><SiKubernetes /></article>
+        {/* Bento Grid Layout */}
+        <div className="about-bento-grid">
+          {/* Card 1: Architectural Philosophy (Large 2-column span) */}
+          <div className="bento-card bento-manifesto reveal">
+            <div className="bento-glow-cyan" />
+            <div className="bento-header">
+              <span className="bento-tag">PHILOSOPHY // 01</span>
+              <SiLinux className="bento-corner-icon" />
+            </div>
+            <h3 className="bento-title">DevOps is empathy codified into infrastructure.</h3>
+            <p className="bento-text">
+              Great software fails without resilient delivery pipelines. My approach centers on
+              removing fear from production releases through immutable infrastructure, automated testing gates,
+              and comprehensive observability. I treat infrastructure with the same rigor as application code:
+              version-controlled, tested, peer-reviewed, and continuously deployed.
+            </p>
+            <div className="manifesto-pillars">
+              <div className="pillar">
+                <FaCheckCircle className="pillar-icon" />
+                <div>
+                  <strong>Declarative State</strong>
+                  <span>100% Terraform IaC with zero manual drift.</span>
+                </div>
+              </div>
+              <div className="pillar">
+                <FaCheckCircle className="pillar-icon" />
+                <div>
+                  <strong>Shift-Left Security</strong>
+                  <span>Trivy & SonarQube integrated before artifacts reach registry.</span>
+                </div>
+              </div>
+              <div className="pillar">
+                <FaCheckCircle className="pillar-icon" />
+                <div>
+                  <strong>Self-Healing Systems</strong>
+                  <span>Kubernetes HPA & automated rollbacks on health probe failure.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: AWS Certified Credentials Highlight */}
+          <div className="bento-card bento-credential reveal">
+            <div className="bento-glow-violet" />
+            <div className="bento-header">
+              <span className="bento-tag">CREDENTIAL // SAA-C03</span>
+              <FaAward className="bento-corner-icon" />
+            </div>
+            <div className="cred-highlight-wrap">
+              <SiAmazon className="aws-cred-icon" />
+              <div>
+                <h4 className="cred-title">AWS Certified Solutions Architect</h4>
+                <p className="cred-subtitle">Associate (SAA-C03)</p>
+              </div>
+            </div>
+            <p className="cred-desc">
+              Validated expertise in designing highly available, cost-optimized, fault-tolerant,
+              and scalable distributed systems on Amazon Web Services.
+            </p>
+            <a
+              href="https://www.credly.com/badges/71a946c7-ad57-40d7-8380-10c2c317cc9d/public_url"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cred-verify-btn"
+            >
+              <span>Verify on Credly</span>
+              <FaExternalLinkAlt size={11} />
+            </a>
+          </div>
+
+          {/* Card 3: Engineering Roadmap Timeline (Full Span) */}
+          <div className="bento-card bento-roadmap reveal">
+            <div className="bento-header">
+              <span className="bento-tag">JOURNEY & EVOLUTION // TIMELINE</span>
+              <FaCodeBranch className="bento-corner-icon" />
+            </div>
+            <h3 className="bento-title">How curiosity evolved into production-grade systems.</h3>
+
+            <div className="roadmap-grid">
+              <div className="roadmap-step">
+                <div className="step-num">STAGE 01</div>
+                <h4 className="step-title">Systems & Linux Core</h4>
+                <p className="step-desc">
+                  Mastered Linux file hierarchies, process management, networking protocols,
+                  and automated shell scripting for repetitive system operations.
+                </p>
+                <div className="step-tags">
+                  <span>Linux</span>
+                  <span>Bash</span>
+                  <span>Networking</span>
+                  <span>Git</span>
+                </div>
+              </div>
+
+              <div className="roadmap-step">
+                <div className="step-num">STAGE 02</div>
+                <h4 className="step-title">Containers & CI/CD</h4>
+                <p className="step-desc">
+                  Architected multi-stage Docker builds, established Jenkins declarative pipelines,
+                  and automated artifact lifecycles with registry scanning.
+                </p>
+                <div className="step-tags">
+                  <span>Docker</span>
+                  <span>Jenkins</span>
+                  <span>SonarQube</span>
+                  <span>ECR</span>
+                </div>
+              </div>
+
+              <div className="roadmap-step">
+                <div className="step-num">STAGE 03</div>
+                <h4 className="step-title">Kubernetes & Terraform</h4>
+                <p className="step-desc">
+                  Provisioned production Amazon EKS clusters using modular Terraform code,
+                  configuring Ingress controllers, Secrets, ConfigMaps, and namespaces.
+                </p>
+                <div className="step-tags">
+                  <span>AWS EKS</span>
+                  <span>Terraform IaC</span>
+                  <span>Helm</span>
+                  <span>IAM</span>
+                </div>
+              </div>
+
+              <div className="roadmap-step active-step">
+                <div className="step-num">STAGE 04 (CURRENT)</div>
+                <h4 className="step-title">GitOps & Observability</h4>
+                <p className="step-desc">
+                  Implementing GitOps delivery workflows via ArgoCD, Prometheus telemetry,
+                  Grafana dashboard alerts, and exploring eBPF kernel observability.
+                </p>
+                <div className="step-tags">
+                  <span>ArgoCD</span>
+                  <span>Prometheus</span>
+                  <span>Grafana</span>
+                  <span>DevSecOps</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 4: Quick Telemetry Quick Facts */}
+          <div className="bento-card bento-facts reveal">
+            <div className="bento-header">
+              <span className="bento-tag">TELEMETRY // VITAL STATS</span>
+              <FaTerminal className="bento-corner-icon" />
+            </div>
+            <div className="facts-list">
+              <div className="fact-item">
+                <span className="fact-label">Primary Cloud:</span>
+                <span className="fact-value">Amazon Web Services (AWS)</span>
+              </div>
+              <div className="fact-item">
+                <span className="fact-label">Cluster Engine:</span>
+                <span className="fact-value">Kubernetes (EKS, K8s, Minikube)</span>
+              </div>
+              <div className="fact-item">
+                <span className="fact-label">IaC Standard:</span>
+                <span className="fact-value">Terraform (HCL) & CloudFormation</span>
+              </div>
+              <div className="fact-item">
+                <span className="fact-label">GitOps Operator:</span>
+                <span className="fact-value">ArgoCD Declarative Continuous Delivery</span>
+              </div>
+              <div className="fact-item">
+                <span className="fact-label">Continuous Learning:</span>
+                <span className="fact-value">#100DaysOfDevOps & KodeKloud Pro</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 5: Core Values */}
+          <div className="bento-card bento-values reveal">
+            <div className="bento-header">
+              <span className="bento-tag">STANDARD // PRODUCTION READY</span>
+              <SiTerraform className="bento-corner-icon" />
+            </div>
+            <h4 className="bento-title">Never deploy manually what can be codified.</h4>
+            <p className="bento-text">
+              If an environment cannot be rebuilt from code in 10 minutes, it is not scalable.
+              Everything from IAM roles to VPC subnets to cluster ingress lives in audited repositories.
+            </p>
+            <div className="values-stack-icons">
+              <SiTerraform title="Terraform" />
+              <SiKubernetes title="Kubernetes" />
+              <SiDocker title="Docker" />
+              <SiAmazon title="AWS" />
+              <SiLinux title="Linux" />
+            </div>
+          </div>
         </div>
       </div>
     </section>

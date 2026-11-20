@@ -1,164 +1,242 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button, Card, Alert } from 'react-bootstrap';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import {
+  FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane,
+  FaCopy, FaCheck, FaMapMarkerAlt, FaClock
+} from 'react-icons/fa';
 import { sendEmail } from '../services/emailService';
+import '../styles/contact.css';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
   });
-  const [showAlert, setShowAlert] = useState(false);
-  const [alertVariant, setAlertVariant] = useState('success');
-  const [alertMessage, setAlertMessage] = useState('');
+
+  const [copied, setCopied] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState(null);
+
+  const emailAddress = 'yaseermhdofficial01@gmail.com';
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(emailAddress);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 3000);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+    setStatusMessage(null);
+
     const result = await sendEmail(formData);
-    
+
     if (result.success) {
-      setAlertVariant('success');
-      setAlertMessage('Message sent successfully!');
+      setStatusMessage({
+        type: 'success',
+        text: 'Transmission confirmed! Your message has been sent successfully. I will respond within 24 hours.',
+      });
       setFormData({ name: '', email: '', message: '' });
     } else {
-      setAlertVariant('danger');
-      setAlertMessage('Failed to send message. Please try again.');
+      setStatusMessage({
+        type: 'error',
+        text: 'Transmission failed. Please reach out directly via email: yaseermhdofficial01@gmail.com',
+      });
     }
-    
+
     setIsSubmitting(false);
-    setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 5000);
   };
 
   return (
-    <Container className="section">
-      <Row>
-        <Col lg={8} className="mx-auto text-center">
-          <h2 className="section-title">Get In Touch</h2>
-          <p className="lead mb-5">
-            Have a question or want to work together? Feel free to reach out!
+    <section className="contact-section" id="contact" aria-labelledby="contact-heading">
+      <div className="section-container">
+        {/* Section Header */}
+        <div className="section-header-centered reveal">
+          <div className="section-badge">
+            <span className="badge-dot" />
+            <span>DIRECT COMMUNICATIONS UPLINK</span>
+          </div>
+          <h2 id="contact-heading" className="section-title-large">
+            Let's build <span className="gradient-text-cyan">something resilient.</span>
+          </h2>
+          <p className="section-subtitle">
+            Whether you have an infrastructure challenge, a cloud migration,
+            or an opportunity for a dedicated DevOps engineer, my inbox is open.
           </p>
-        </Col>
-      </Row>
+        </div>
 
-      <Row>
-        <Col lg={5} className="mb-4 mb-lg-0">
-          <Card className="border-0 shadow-sm h-100">
-            <Card.Body className="p-4">
-              <h3 className="mb-4">Contact Information</h3>
+        <div className="contact-grid-layout">
+          {/* Left Column: Direct Channels & Signal */}
+          <div className="contact-channels-card reveal">
+            <div className="channels-card-header">
+              <span className="channel-tag">CHANNEL // DIRECT</span>
+              <h3>Get In Touch</h3>
+              <p>Response SLA: Under 24 hours</p>
+            </div>
 
-              <div className="d-flex align-items-center mb-4">
-                <FaEnvelope className="me-3 text-primary" size={24} />
-                <div>
-                  <h5 className="mb-0">Email</h5>
-                  <p className="mb-0">
-                    <a href="yaseermhdofficial01@gmail.com" style={{ textDecoration: 'none', color: 'inherit' }}>
-                      yaseermhdofficial01@gmail.com
-                    </a>
-                  </p>
+            <div className="channels-list">
+              {/* Email channel with 1-click copy */}
+              <div className="channel-item email-channel">
+                <div className="channel-icon-wrap">
+                  <FaEnvelope />
                 </div>
-
-              </div>
-
-              <div className="d-flex align-items-center mb-4">
-                <FaLinkedin className="me-3 text-primary" size={24} />
-                <div>
-                  <h5 className="mb-0">LinkedIn</h5>
-                  <p className="mb-0">
-                  <a href="https://www.linkedin.com/in/mhdyaseer/" target="_blank" rel="noopener noreferrer">
-                      linkedin.com/in/mhdyaseer
-                    </a>
-                  </p>
+                <div className="channel-info">
+                  <span className="channel-label">ELECTRONIC MAIL</span>
+                  <a href={`mailto:${emailAddress}`} className="channel-link">
+                    {emailAddress}
+                  </a>
                 </div>
-              </div>
-
-              <div className="d-flex align-items-center">
-                <FaGithub className="me-3 text-primary" size={24} />
-                <div>
-                  <h5 className="mb-0">GitHub</h5>
-                  <p className="mb-0">
-                    <a href="https://github.com/codeBuilt864" target="_blank" rel="noopener noreferrer">
-                      github.com/codeBuilt864
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col lg={7}>
-          <Card className="border-0 shadow-sm">
-            <Card.Body className="p-4">
-              <h3 className="mb-4">Send a Message</h3>
-
-              {showAlert && (
-                <Alert variant={alertVariant} onClose={() => setShowAlert(false)} dismissible>
-                  {alertMessage}
-                </Alert>
-              )}
-
-              <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-4">
-                  <Form.Label>Message</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={5}
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                  />
-                </Form.Group>
-
-                <Button 
-                  variant="primary" 
-                  type="submit" 
-                  size="lg" 
-                  disabled={isSubmitting}
+                <button
+                  type="button"
+                  className="channel-copy-btn"
+                  onClick={handleCopyEmail}
+                  title="Copy email to clipboard"
+                  aria-label="Copy email"
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+                  {copied ? <FaCheck className="copy-ok" /> : <FaCopy />}
+                </button>
+              </div>
+
+              {/* LinkedIn channel */}
+              <a
+                href="https://www.linkedin.com/in/mhdyaseer/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="channel-item"
+              >
+                <div className="channel-icon-wrap linkedin-wrap">
+                  <FaLinkedin />
+                </div>
+                <div className="channel-info">
+                  <span className="channel-label">PROFESSIONAL NETWORK</span>
+                  <span className="channel-link">linkedin.com/in/mhdyaseer</span>
+                </div>
+              </a>
+
+              {/* GitHub channel */}
+              <a
+                href="https://github.com/codeBuilt864"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="channel-item"
+              >
+                <div className="channel-icon-wrap github-wrap">
+                  <FaGithub />
+                </div>
+                <div className="channel-info">
+                  <span className="channel-label">CODE REPOSITORY</span>
+                  <span className="channel-link">github.com/codeBuilt864</span>
+                </div>
+              </a>
+            </div>
+
+            {/* Availability details */}
+            <div className="channels-meta-box">
+              <div className="meta-row">
+                <FaMapMarkerAlt className="meta-icon" />
+                <span>Location: India (Open to Global Remote / Relocation)</span>
+              </div>
+              <div className="meta-row">
+                <FaClock className="meta-icon" />
+                <span>Timezone: IST (UTC +5:30) • Flexible for international teams</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: High-Tech Contact Form */}
+          <div className="contact-form-card reveal">
+            <div className="form-card-header">
+              <span className="form-card-tag">ENCRYPTED // FORM DISPATCH</span>
+              <h3>Transmit a Message</h3>
+            </div>
+
+            {statusMessage && (
+              <div className={`status-banner banner-${statusMessage.type}`}>
+                <span className="status-indicator-dot" />
+                <span>{statusMessage.text}</span>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="cyber-form">
+              <div className="form-field-group">
+                <label htmlFor="name" className="field-label">
+                  Your Full Name <span className="req">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="e.g. Alex Morgan"
+                  className="cyber-input"
+                />
+              </div>
+
+              <div className="form-field-group">
+                <label htmlFor="email" className="field-label">
+                  Your Email Address <span className="req">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="e.g. alex@company.com"
+                  className="cyber-input"
+                />
+              </div>
+
+              <div className="form-field-group">
+                <label htmlFor="message" className="field-label">
+                  Message / Project Scope <span className="req">*</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  placeholder="Describe your architecture requirements, infrastructure project, or team role..."
+                  className="cyber-textarea"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="cyber-btn cyber-btn-primary form-submit-btn"
+              >
+                {isSubmitting ? (
+                  <>
+                    <span className="btn-spinner" />
+                    <span>Transmitting Signal...</span>
+                  </>
+                ) : (
+                  <>
+                    <FaPaperPlane className="btn-icon" />
+                    <span>Send Message</span>
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
