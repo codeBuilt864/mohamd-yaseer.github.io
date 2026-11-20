@@ -87,6 +87,8 @@
   min-height: 380px;
   max-height: 520px;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
   font-family: var(--font-mono);
   font-size: 13px;
   line-height: 1.6;

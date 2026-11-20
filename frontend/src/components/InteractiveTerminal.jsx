@@ -96,12 +96,15 @@ const InteractiveTerminal = () => {
   const [inputVal, setInputVal] = useState('');
   const [isSimulating, setIsSimulating] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
-  const terminalEndRef = useRef(null);
+  const terminalBodyRef = useRef(null);
   const inputRef = useRef(null);
 
+  // Keep internal terminal scrolled to bottom without scrolling window or jumping to navbar
   useEffect(() => {
-    terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [history]);
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
+    }
+  }, [history, isSimulating]);
 
   const executeCommand = (cmdText) => {
     const trimmed = cmdText.trim().toLowerCase();
@@ -155,14 +158,19 @@ const InteractiveTerminal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     if (isSimulating) return;
+    if (!inputVal.trim()) return;
     executeCommand(inputVal);
     setInputVal('');
   };
 
-  const handleChipClick = (cmd) => {
+  const handleChipClick = (e, cmd) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (isSimulating) return;
     executeCommand(cmd);
+    inputRef.current?.focus({ preventScroll: true });
   };
 
   return (
@@ -181,7 +189,11 @@ const InteractiveTerminal = () => {
           <button
             type="button"
             className="term-action-btn"
-            onClick={() => setHistory([])}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setHistory([]);
+            }}
             title="Clear terminal"
             aria-label="Clear terminal"
           >
@@ -190,7 +202,11 @@ const InteractiveTerminal = () => {
           <button
             type="button"
             className="term-action-btn"
-            onClick={() => setIsMaximized(!isMaximized)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsMaximized(!isMaximized);
+            }}
             title={isMaximized ? "Restore" : "Maximize"}
             aria-label="Toggle size"
           >
@@ -199,7 +215,11 @@ const InteractiveTerminal = () => {
         </div>
       </div>
 
-      <div className="terminal-body" onClick={() => inputRef.current?.focus()}>
+      <div
+        ref={terminalBodyRef}
+        className="terminal-body"
+        onClick={() => inputRef.current?.focus({ preventScroll: true })}
+      >
         {history.map((entry, idx) => (
           <div key={idx} className={`term-line term-${entry.type}`}>
             {entry.type === 'input' && <span className="term-prompt-symbol">ysr@aws:~$ </span>}
@@ -225,7 +245,6 @@ const InteractiveTerminal = () => {
             autoComplete="off"
           />
         </form>
-        <div ref={terminalEndRef} />
       </div>
 
       <div className="terminal-quick-chips">
@@ -235,7 +254,7 @@ const InteractiveTerminal = () => {
             key={cmd}
             type="button"
             className="terminal-chip"
-            onClick={() => handleChipClick(cmd)}
+            onClick={(e) => handleChipClick(e, cmd)}
             disabled={isSimulating}
           >
             <FaPlay className="chip-play-icon" /> {cmd}
