@@ -171,24 +171,24 @@ const About = () => {
             </div>
             <div className="facts-list">
               <div className="fact-item">
-                <span className="fact-label">Primary Cloud:</span>
-                <span className="fact-value">Amazon Web Services (AWS)</span>
+                <span className="fact-label">Cloud Platforms:</span>
+                <span className="fact-value">AWS & Microsoft Azure</span>
               </div>
               <div className="fact-item">
-                <span className="fact-label">Cluster Engine:</span>
-                <span className="fact-value">Kubernetes (EKS, K8s, Minikube)</span>
+                <span className="fact-label">Proven Deployments:</span>
+                <span className="fact-value">5+ End-to-End Production Topologies</span>
               </div>
               <div className="fact-item">
-                <span className="fact-label">IaC Standard:</span>
-                <span className="fact-value">Terraform (HCL) & CloudFormation</span>
+                <span className="fact-label">Full-Stack Scale:</span>
+                <span className="fact-value">20+ MERN Stack Applications</span>
               </div>
               <div className="fact-item">
-                <span className="fact-label">GitOps Operator:</span>
-                <span className="fact-value">ArgoCD Declarative Continuous Delivery</span>
+                <span className="fact-label">Academic Merit:</span>
+                <span className="fact-value">BICT, Rajarata University (GPA: 3.20)</span>
               </div>
               <div className="fact-item">
-                <span className="fact-label">Continuous Learning:</span>
-                <span className="fact-value">#100DaysOfDevOps & KodeKloud Pro</span>
+                <span className="fact-label">Strategic Edge:</span>
+                <span className="fact-value">Two-Time University Chess Champion</span>
               </div>
             </div>
           </div>

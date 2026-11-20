@@ -143,11 +143,11 @@ const Contact = () => {
             <div className="channels-meta-box">
               <div className="meta-row">
                 <FaMapMarkerAlt className="meta-icon" />
-                <span>Location: India (Open to Global Remote / Relocation)</span>
+                <span>Location: No 216, Thopur, Trincomalee, Sri Lanka</span>
               </div>
               <div className="meta-row">
                 <FaClock className="meta-icon" />
-                <span>Timezone: IST (UTC +5:30) • Flexible for international teams</span>
+                <span>Phone: +94 75 733 2727 • Email: yaseermhdofficial01@gmail.com</span>
               </div>
             </div>
           </div>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import {
   FaJenkins, FaGithub, FaDocker, FaAws, FaCode,
-  FaLock, FaCheckCircle, FaNetworkWired, FaLayerGroup
+  FaLock, FaCheckCircle, FaLayerGroup
 } from 'react-icons/fa';
 import {
   SiKubernetes, SiTerraform, SiAnsible, SiPrometheus,
-  SiGrafana, SiArgo, SiLinux, SiPython, SiHelm, SiGnubash, SiYaml
+  SiGrafana, SiArgo, SiLinux, SiPython, SiHelm, SiGnubash, SiYaml,
+  SiMicrosoftazure, SiMongodb, SiExpress, SiReact
 } from 'react-icons/si';
 import '../styles/skills.css';
 
@@ -15,6 +16,7 @@ const SKILL_CATEGORIES = [
   { id: 'containers', label: 'Kubernetes & Containers' },
   { id: 'cicd', label: 'CI/CD & GitOps' },
   { id: 'observability', label: 'Observability & SRE' },
+  { id: 'fullstack', label: 'Full-Stack MERN' },
   { id: 'security', label: 'DevSecOps & Governance' },
   { id: 'core', label: 'Linux & Scripting' },
 ];
@@ -22,8 +24,8 @@ const SKILL_CATEGORIES = [
 const SKILLS_DATA = [
   // Cloud & IaC
   { name: 'Amazon Web Services (AWS)', category: 'cloud', level: 'Advanced', icon: <FaAws />, color: '#FF9900', desc: 'EKS, VPC, EC2, S3, IAM, CloudWatch, Route53, RDS, ECR architecture.' },
+  { name: 'Microsoft Azure', category: 'cloud', level: 'Advanced', icon: <SiMicrosoftazure />, color: '#0078D4', desc: 'Azure VMs, Virtual Networks, NSGs, resource groups, and automated Azure pipelines.' },
   { name: 'Terraform (IaC)', category: 'cloud', level: 'Advanced', icon: <SiTerraform />, color: '#7B42BC', desc: 'Modular infrastructure as code, remote state in S3/DynamoDB, zero-drift execution.' },
-  { name: 'AWS CloudFormation', category: 'cloud', level: 'Proficient', icon: <FaAws />, color: '#FF9900', desc: 'Native AWS template authoring, nested stacks, and automated rollback triggers.' },
   { name: 'Ansible', category: 'cloud', level: 'Proficient', icon: <SiAnsible />, color: '#EE0000', desc: 'Idempotent configuration management, server provisioning, and role automation.' },
 
   // Containers
@@ -35,17 +37,21 @@ const SKILLS_DATA = [
   { name: 'Jenkins CI/CD', category: 'cicd', level: 'Advanced', icon: <FaJenkins />, color: '#D24939', desc: 'Declarative scripted Jenkinsfiles, multi-branch pipelines, shared libraries, webhook integration.' },
   { name: 'ArgoCD (GitOps)', category: 'cicd', level: 'Advanced', icon: <SiArgo />, color: '#EF7B4D', desc: 'Declarative continuous delivery, auto-syncing Git repos to live Kubernetes clusters.' },
   { name: 'GitHub Actions', category: 'cicd', level: 'Proficient', icon: <FaGithub />, color: '#00F0FF', desc: 'Automated CI workflows, matrix builds, release packaging, and secret scanning.' },
-  { name: 'GitLab CI/CD', category: 'cicd', level: 'Proficient', icon: <FaCode />, color: '#FC6D26', desc: 'Multi-stage .gitlab-ci.yml pipelines with dynamic environments and artifact tracking.' },
+  { name: 'SonarQube Quality Gate', category: 'cicd', level: 'Advanced', icon: <FaCode />, color: '#4E9BCD', desc: 'Static code analysis (SAST), code smells, security hotspots, and coverage gates.' },
 
   // Observability
   { name: 'Prometheus', category: 'observability', level: 'Advanced', icon: <SiPrometheus />, color: '#E6522C', desc: 'Metric collection, PromQL queries, Node Exporter, kube-state-metrics, and Alertmanager rules.' },
   { name: 'Grafana Telemetry', category: 'observability', level: 'Advanced', icon: <SiGrafana />, color: '#F46800', desc: 'Real-time telemetry dashboards, SLO/SLI tracking, data source aggregation.' },
   { name: 'AWS CloudWatch', category: 'observability', level: 'Advanced', icon: <FaAws />, color: '#FF9900', desc: 'Log groups, metric filters, alarm triggers, and synthesized application monitors.' },
-  { name: 'ELK / Log Aggregation', category: 'observability', level: 'Proficient', icon: <FaNetworkWired />, color: '#005571', desc: 'Centralized cluster log streaming, parsing, and real-time error auditing.' },
+
+  // Full-Stack MERN
+  { name: 'React.js', category: 'fullstack', level: 'Advanced', icon: <SiReact />, color: '#61DAFB', desc: 'Modern hooks, client routing, context API, state management, responsive UI development.' },
+  { name: 'Node.js & Express.js', category: 'fullstack', level: 'Advanced', icon: <SiExpress />, color: '#00F0FF', desc: 'RESTful API architecture, middleware pipelines, authentication, and error handling.' },
+  { name: 'MongoDB', category: 'fullstack', level: 'Advanced', icon: <SiMongodb />, color: '#47A248', desc: 'Mongoose schemas, aggregation pipelines, document modeling, and query optimization.' },
+  { name: 'RESTful APIs', category: 'fullstack', level: 'Advanced', icon: <FaLayerGroup />, color: '#38BDF8', desc: 'Stateless API contracts, payload validation, JWT bearer tokens, and microservice endpoints.' },
 
   // DevSecOps
   { name: 'Trivy Vulnerability Scanner', category: 'security', level: 'Advanced', icon: <FaLock />, color: '#00B4D8', desc: 'Automated container image CVE detection embedded directly in CI pipelines.' },
-  { name: 'SonarQube Quality Gate', category: 'security', level: 'Advanced', icon: <FaCode />, color: '#4E9BCD', desc: 'Static code analysis (SAST), code smells, security hotspots, and coverage gates.' },
   { name: 'AWS IAM & Least Privilege', category: 'security', level: 'Advanced', icon: <FaLock />, color: '#FF9900', desc: 'Role-based access controls, IRSA (IAM Roles for Service Accounts), policy auditing.' },
   { name: 'Secrets Management', category: 'security', level: 'Proficient', icon: <FaLock />, color: '#38BDF8', desc: 'Sealed Secrets, HashiCorp Vault patterns, and encrypted environmental configurations.' },
 

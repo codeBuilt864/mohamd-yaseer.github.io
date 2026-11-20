@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.daf632ca.css",
-    "main.js": "./static/js/main.657e1f89.js",
+    "main.css": "./static/css/main.239d5519.css",
+    "main.js": "./static/js/main.d3816fda.js",
     "static/js/453.c2e8e339.chunk.js": "./static/js/453.c2e8e339.chunk.js",
     "static/media/profile-photo1.png": "./static/media/profile-photo1.04d56000249b3ceb8507.png",
     "static/media/kodekloud-course-completion-certificate.png": "./static/media/kodekloud-course-completion-certificate.ac7855042298adb52bc8.png",
@@ -11,12 +11,12 @@
     "static/media/aws-educate-introduction-to-generative-ai-training-.png": "./static/media/aws-educate-introduction-to-generative-ai-training-.523bd653ce63215025c1.png",
     "static/media/aws-educate-introduction-to-cloud-101.png": "./static/media/aws-educate-introduction-to-cloud-101.a093d8647216eca83a52.png",
     "index.html": "./index.html",
-    "main.daf632ca.css.map": "./static/css/main.daf632ca.css.map",
-    "main.657e1f89.js.map": "./static/js/main.657e1f89.js.map",
+    "main.239d5519.css.map": "./static/css/main.239d5519.css.map",
+    "main.d3816fda.js.map": "./static/js/main.d3816fda.js.map",
     "453.c2e8e339.chunk.js.map": "./static/js/453.c2e8e339.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.daf632ca.css",
-    "static/js/main.657e1f89.js"
+    "static/css/main.239d5519.css",
+    "static/js/main.d3816fda.js"
   ]
 }

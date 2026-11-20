@@ -13,41 +13,48 @@ const COMMANDS = {
   • status        - Live cluster health & latency telemetry
   • clear         - Clear terminal screen`,
 
-  whoami: `MOHAMED YASEER // DevOps & Cloud Systems Engineer
+  whoami: `RAHMATHTHULLA MOHAMED YAASEER // Aspiring Cloud | SRE | DevOps Engineer
 --------------------------------------------------
-Location    : India (Available for Global Remote & Hybrid)
-Focus       : Scalable Kubernetes topologies, Infrastructure as Code,
-              resilient CI/CD pipelines, and proactive observability.
+Location    : Trincomalee, Sri Lanka (Available for Global Remote)
+Contact     : +94 75 733 2727 | yaseermhdofficial01@gmail.com
+Education   : Bachelor of Information and Communication Technology (BICT)
+              Rajarata University of Sri Lanka (GPA: 3.20 / 4.00)
+Honors      : Two-Time University Chess Champion (Rajarata University)
+Focus       : 5+ Cloud Deployments, Multi-Stage CI/CD across AWS & Azure,
+              Resilient Kubernetes Topologies, 20+ MERN Stack Projects.
 Philosophy  : "Make complex systems feel inevitable. Automate what moves,
               observe what lives, and secure what scales."
 Cert        : AWS Certified Solutions Architect - Associate (SAA-C03)`,
 
   skills: `CORE ENGINEERING STACK:
 --------------------------------------------------
-[+] Cloud & IaC      : AWS (EKS, VPC, EC2, S3, IAM), Terraform, CloudFormation, Ansible
-[+] Containers       : Docker, Docker Compose, Kubernetes, Helm Charts, Podman
-[+] CI/CD & GitOps   : Jenkins (Pipelines as Code), GitHub Actions, ArgoCD, GitLab CI
-[+] Observability    : Prometheus, Grafana, CloudWatch, ELK Stack
-[+] DevSecOps        : Trivy, SonarQube, IAM Least-Privilege, Secrets Management
-[+] Core / Scripting : Linux/Unix Kernel, Bash Shell, Python, YAML/JSON, Git`,
+[+] Cloud & IaC      : AWS (EKS, VPC, EC2, S3, IAM), Microsoft Azure, Terraform, Ansible
+[+] Containers       : Docker, Docker Compose, Kubernetes (K8s), Helm 3, Microservices
+[+] CI/CD & GitOps   : Jenkins (Pipelines as Code), GitHub Actions, ArgoCD, Azure DevOps
+[+] Observability    : Prometheus, Grafana Telemetry, CloudWatch, Alertmanager
+[+] Full-Stack MERN  : MongoDB, Express.js, React.js, Node.js, RESTful APIs, JWT
+[+] DevSecOps        : Trivy CVE Scanner, SonarQube SAST, IAM Least-Privilege, Secrets
+[+] Core / Scripting : Linux OS Kernel, Bash Scripting, Python Automation, YAML/JSON, Git`,
 
-  projects: `SELECTED ARCHITECTURAL BUILDS:
+  projects: `FEATURED PRODUCTION & CLOUD BUILDS:
 --------------------------------------------------
-01. Three-Tier DevSecOps Pipeline on AWS EKS
-    - GitOps automated delivery with ArgoCD & Jenkins
-    - Terraform modular VPC & EKS cluster provisioning
-    - SonarQube quality gates & Trivy container security
-    -> GitHub: github.com/codeBuilt864/three-tier-devsecops-project
+01. Automated CI/CD & Auto-Scaling Kubernetes Deployment
+    - Java Spring Boot, Docker, Kubernetes, Jenkins, HPA, Blue-Green
+    - LinkedIn Video Demo: https://lnkd.in/p/gwPx_rH6
+    - Code: github.com/codeBuilt864/Ecommerce-App-Kastro
 
-02. Automated EKS Cluster Provisioning
-    - Codified AWS EKS infrastructure with Terraform & Jenkins
-    - Reduced cluster setup time from 20+ min to single click
-    -> GitHub: github.com/codeBuilt864/Jenkins-Terraform-EKS
+02. Automated Multi-Stage CI/CD for 3-Tier MERN on Azure
+    - Microsoft Azure VMs, Jenkins Pipelines, Docker, Bash Scripting
+    - Zero-downtime rolling updates & environment parity
+    - LinkedIn Video Demo: https://lnkd.in/p/gwPx_rH6
 
-03. E-Commerce Microservices Pipeline & K8s
-    - Containerized Java/MySQL multi-tier architecture
-    - Rolling zero-downtime updates & Horizontal Pod Autoscaling
-    -> GitHub: github.com/codeBuilt864/Ecommerce-App-Kastro`,
+03. Full-Stack E-Commerce Book Platform
+    - MongoDB, Express.js, React.js, Node.js, Modular REST APIs
+    - Code: github.com/codeBuilt864/mern-book-MS
+
+04. Three-Tier DevSecOps Pipeline on AWS EKS
+    - GitOps with ArgoCD, Terraform IaC, Trivy, SonarQube, Prometheus & Grafana
+    - Code: github.com/codeBuilt864/three-tier-devsecops-project`,
 
   certs: `VERIFIED CREDENTIAL ARCHIVE:
 --------------------------------------------------

@@ -63,10 +63,10 @@
 
 .resume-applicant-name {
   font-family: var(--font-heading);
-  font-size: 28px;
+  font-size: clamp(20px, 2.5vw, 26px);
   font-weight: 800;
   color: var(--text-primary);
-  line-height: 1.1;
+  line-height: 1.15;
   margin-bottom: 6px;
 }
 
@@ -74,7 +74,7 @@
   font-family: var(--font-mono);
   font-size: 13px;
   color: var(--accent-cyan);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .resume-actions-row {
@@ -94,7 +94,7 @@
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
-  padding: 28px;
+  padding: 24px;
 }
 
 .highlight-title {
@@ -107,8 +107,8 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--text-primary);
-  margin-bottom: 18px;
-  padding-bottom: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -116,62 +116,119 @@
   color: var(--accent-cyan);
 }
 
-.highlight-list {
-  list-style: none;
-  display: grid;
-  gap: 14px;
-}
-
-.highlight-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.hl-check {
-  color: var(--accent-cyan);
+.resume-summary-body {
   font-size: 13px;
-  margin-top: 3px;
-  flex-shrink: 0;
-}
-
-.highlight-list li div {
-  display: flex;
-  flex-direction: column;
-}
-
-.highlight-list strong {
-  font-family: var(--font-heading);
-  font-size: 13px;
-  color: var(--text-primary);
-}
-
-.highlight-list span {
-  font-size: 12px;
+  line-height: 1.7;
   color: var(--text-secondary);
-  line-height: 1.5;
 }
 
+/* Milestones */
 .milestone-box {
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
 }
 
-.milestone-box strong {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 13px;
-  color: var(--text-primary);
+.milestone-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   margin-bottom: 4px;
 }
 
-.milestone-box p {
+.milestone-header strong {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.milestone-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  background: var(--accent-cyan-subtle);
+  color: var(--accent-cyan);
+  border-radius: 4px;
+  border: 1px solid var(--border-medium);
+  white-space: nowrap;
+}
+
+.milestone-inst {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.milestone-stat {
+  font-family: var(--font-mono);
   font-size: 11px;
+  color: var(--accent-emerald);
+  font-weight: 600;
+}
+
+/* Honors */
+.honor-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.honor-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.trophy-gold {
+  color: #f59e0b;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.honor-title strong {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.honor-box p {
+  font-size: 12px;
   color: var(--text-secondary);
+  line-height: 1.6;
   margin: 0;
+}
+
+.languages-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+}
+
+.lang-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.lang-pill {
+  padding: 3px 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  font-size: 11px;
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
 }
 
 /* Right Panel: Embedded Iframe Viewer */

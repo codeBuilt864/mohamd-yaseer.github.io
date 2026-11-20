@@ -250,6 +250,17 @@
   gap: 14px;
 }
 
+.case-action-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.case-action-btns .cyber-btn {
+  width: 100%;
+  justify-content: center;
+}
+
 .action-meta {
   display: flex;
   align-items: center;

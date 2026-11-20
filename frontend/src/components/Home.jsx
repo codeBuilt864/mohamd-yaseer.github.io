@@ -165,8 +165,7 @@ const Home = () => {
     card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
   };
 
-  const googleDriveFileId = '1_s1isDMIaatH5Ou-dPsTEPVJ252JzcTE';
-  const resumeDownloadUrl = `https://drive.google.com/uc?export=download&id=${googleDriveFileId}`;
+  const resumeDownloadUrl = `${process.env.PUBLIC_URL || ''}/Mohamed_Yaaseer_CV.pdf`;
 
   return (
     <div className="home-shell" ref={heroRef}>
@@ -230,7 +229,7 @@ const Home = () => {
 
             <a
               href={resumeDownloadUrl}
-              download="Mohamed_Yaseer_Resume.pdf"
+              download="CV_Rahmaththulla_Mohamed_Yaaseer.pdf"
               className="cyber-btn cyber-btn-secondary"
             >
               <FaDownload className="btn-icon" />

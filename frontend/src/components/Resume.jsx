@@ -1,11 +1,12 @@
 import React from 'react';
-import { FaDownload, FaExternalLinkAlt, FaFilePdf, FaCheckCircle, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
+import {
+  FaDownload, FaExternalLinkAlt, FaFilePdf,
+  FaBriefcase, FaGraduationCap, FaTrophy, FaLanguage
+} from 'react-icons/fa';
 import '../styles/resume.css';
 
 const Resume = () => {
-  const googleDriveFileId = '1_s1isDMIaatH5Ou-dPsTEPVJ252JzcTE';
-  const downloadUrl = `https://drive.google.com/uc?export=download&id=${googleDriveFileId}`;
-  const previewUrl = `https://drive.google.com/file/d/${googleDriveFileId}/preview`;
+  const cvFileUrl = `${process.env.PUBLIC_URL || ''}/Mohamed_Yaaseer_CV.pdf`;
 
   return (
     <section className="resume-section" id="resume" aria-labelledby="resume-heading">
@@ -14,14 +15,14 @@ const Resume = () => {
         <div className="section-header-centered reveal">
           <div className="section-badge">
             <span className="badge-dot" />
-            <span>CURRICULUM VITAE // 2026</span>
+            <span>CURRICULUM VITAE // VERIFIED</span>
           </div>
           <h2 id="resume-heading" className="section-title-large">
-            Professional trajectory & <span className="gradient-text-cyan">verified competencies.</span>
+            Professional trajectory & <span className="gradient-text-cyan">verified credentials.</span>
           </h2>
           <p className="section-subtitle">
-            A comprehensive profile of production builds, hands-on lab achievements,
-            and cloud infrastructure credentials.
+            Hands-on track record delivering 5+ end-to-end cloud deployments, multi-stage CI/CD pipelines
+            across AWS and Azure, and architecting resilient Kubernetes environments.
           </p>
         </div>
 
@@ -31,105 +32,114 @@ const Resume = () => {
             <div className="resume-card-hero">
               <div className="resume-badge-status">
                 <span className="pulse-dot-green" />
-                <span>OPEN FOR DEVOPS & SRE OPPORTUNITIES</span>
+                <span>OPEN FOR CLOUD, SRE & DEVOPS ROLES</span>
               </div>
-              <h3 className="resume-applicant-name">MOHAMED YASEER</h3>
-              <p className="resume-applicant-role">DevOps & Cloud Systems Engineer</p>
+              <h3 className="resume-applicant-name">RAHMATHTHULLA MOHAMED YAASEER</h3>
+              <p className="resume-applicant-role">Aspiring Cloud | SRE | DevOps Engineer</p>
 
               <div className="resume-actions-row">
                 <a
-                  href={downloadUrl}
-                  download="Mohamed_Yaseer_Resume.pdf"
+                  href={cvFileUrl}
+                  download="CV_Rahmaththulla_Mohamed_Yaaseer.pdf"
                   className="cyber-btn cyber-btn-primary"
                 >
                   <FaDownload className="btn-icon" />
                   <span>Download CV (PDF)</span>
                 </a>
                 <a
-                  href={`https://drive.google.com/file/d/${googleDriveFileId}/view?usp=sharing`}
+                  href={cvFileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cyber-btn cyber-btn-outline"
                 >
                   <FaExternalLinkAlt className="btn-icon" />
-                  <span>View in Drive</span>
+                  <span>Open Fullscreen</span>
                 </a>
               </div>
             </div>
 
             {/* Quick Summary Highlights */}
             <div className="resume-highlights-container">
+              {/* Summary */}
               <div className="highlight-section">
                 <h4 className="highlight-title">
-                  <FaBriefcase className="hl-icon" /> Core Competencies
+                  <FaBriefcase className="hl-icon" /> Professional Summary
                 </h4>
-                <ul className="highlight-list">
-                  <li>
-                    <FaCheckCircle className="hl-check" />
-                    <div>
-                      <strong>Cloud Architecture & IaC</strong>
-                      <span>Amazon Web Services (EKS, VPC, EC2, IAM) codified 100% in modular Terraform.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <FaCheckCircle className="hl-check" />
-                    <div>
-                      <strong>Container Orchestration</strong>
-                      <span>Kubernetes deployments, Ingress controllers, Helm charts, and multi-stage Dockerfiles.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <FaCheckCircle className="hl-check" />
-                    <div>
-                      <strong>GitOps & CI/CD Pipelines</strong>
-                      <span>ArgoCD declarative delivery paired with Jenkins scripted pipelines and Trivy security gates.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <FaCheckCircle className="hl-check" />
-                    <div>
-                      <strong>Observability & Reliability</strong>
-                      <span>Prometheus metrics scraping, Grafana dashboards, Alertmanager, and CloudWatch alerts.</span>
-                    </div>
-                  </li>
-                </ul>
+                <p className="resume-summary-body">
+                  Results-driven DevOps & Full Stack Engineer with hands-on experience building scalable
+                  cloud infrastructure and robust web applications. Proven track record delivering 5+ end-to-end
+                  cloud deployments across AWS and Azure, with 20+ completed MERN stack projects.
+                </p>
               </div>
 
+              {/* Education */}
               <div className="highlight-section">
                 <h4 className="highlight-title">
-                  <FaGraduationCap className="hl-icon" /> Key Milestones & Learning
+                  <FaGraduationCap className="hl-icon" /> Education & Academic Background
                 </h4>
                 <div className="milestone-box">
-                  <strong>AWS Certified Solutions Architect (SAA-C03)</strong>
-                  <p>Certified by Amazon Web Services in scalable and fault-tolerant cloud design.</p>
+                  <div className="milestone-header">
+                    <strong>Bachelor of Information and Communication Technology (BICT)</strong>
+                    <span className="milestone-badge">Expected 2027</span>
+                  </div>
+                  <p className="milestone-inst">Rajarata University of Sri Lanka</p>
+                  <span className="milestone-stat">Current GPA: 3.20 / 4.00</span>
                 </div>
+
                 <div className="milestone-box">
-                  <strong>KodeKloud Kubernetes Pro</strong>
-                  <p>Intensive hands-on labs on live multi-node Kubernetes clusters.</p>
+                  <div className="milestone-header">
+                    <strong>G.C.E. Advanced Level (2018) – Technology Stream</strong>
+                    <span className="milestone-badge">Passed</span>
+                  </div>
+                  <p className="milestone-inst">Science for Tech (SFT: B), ICT (B), Engineering Tech (ET: C)</p>
+                </div>
+              </div>
+
+              {/* Honors & Languages */}
+              <div className="highlight-section">
+                <h4 className="highlight-title">
+                  <FaTrophy className="hl-icon" /> Honors & Leadership
+                </h4>
+                <div className="honor-box">
+                  <div className="honor-title">
+                    <FaTrophy className="trophy-gold" />
+                    <strong>Two-Time Chess Champion — Rajarata University Chess Team</strong>
+                  </div>
+                  <p>
+                    Secured 1st place in 2 university tournaments; applied tactical strategy,
+                    pattern analysis, and high-pressure decision-making to complex engineering challenges.
+                  </p>
+                </div>
+
+                <div className="languages-strip">
+                  <span className="lang-title"><FaLanguage /> Languages:</span>
+                  <span className="lang-pill">English (Professional)</span>
+                  <span className="lang-pill">Tamil (Native)</span>
+                  <span className="lang-pill">Sinhala (Conversational)</span>
+                  <span className="lang-pill">German (A2)</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Panel: Interactive Embedded PDF Viewer */}
+          {/* Right Panel: Embedded Real PDF Viewer */}
           <div className="resume-right-panel reveal">
             <div className="resume-viewer-frame">
               <div className="viewer-top-toolbar">
                 <div className="viewer-file-info">
                   <FaFilePdf className="pdf-icon" />
-                  <span>mohamed-yaseer-resume.pdf</span>
+                  <span>CV_Rahmaththulla_Mohamed_Yaaseer.pdf</span>
                 </div>
                 <div className="viewer-toolbar-actions">
-                  <span className="doc-version-tag">VER_2026.01</span>
+                  <span className="doc-version-tag">OFFICIAL_CV // 2026</span>
                 </div>
               </div>
 
               <div className="viewer-iframe-wrapper">
                 <iframe
                   className="resume-embed-iframe"
-                  src={previewUrl}
-                  title="Mohamed Yaseer Resume Preview"
-                  allow="autoplay"
+                  src={`${cvFileUrl}#view=FitH`}
+                  title="Mohamed Yaaseer Official CV"
                 />
               </div>
             </div>
